@@ -1,0 +1,12 @@
+.content-container {
+    position: relative;
+    /* Other styles for your content container */
+  }
+  
+  pagination-controls {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 10px; /* Adjust the margin as needed */
+  }
+  

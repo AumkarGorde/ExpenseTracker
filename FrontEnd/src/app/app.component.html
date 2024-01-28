@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+  <div class="container">
+    <a routerLink="/" class="navbar-brand">Expense Tracker</a>
+    <button
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      class="navbar-toggler"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" *ngIf="isAuthenticated$ | async">
+          <a routerLink="/dashboard" class="nav-link active"  routerLinkActive="active">Dashboard</a>
+        </li>
+        <li class="nav-item" *ngIf="isAuthenticated$ | async">
+          <a routerLink="/expense" class="nav-link"  routerLinkActive="active">Expense</a>
+        </li>
+        <li class="nav-item" *ngIf="isAuthenticated$ | async">
+          <a routerLink="/category" class="nav-link"  routerLinkActive="active">Category</a>
+        </li>
+        <li class="nav-item" *ngIf="isAuthenticated$ | async">
+          <a routerLink="/report" class="nav-link"  routerLinkActive="active">Reports</a>
+        </li>
+        <li class="nav-item" *ngIf="isAuthenticated$ | async">
+          <a routerLink="/profile" class="nav-link"  routerLinkActive="active">Profile</a>
+        </li>
+        <li class="nav-item" *ngIf="!(isAuthenticated$ | async)">
+          <a routerLink="/login" class="nav-link"  routerLinkActive="active">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="!(isAuthenticated$ | async)">
+          <a routerLink="/register" class="nav-link"  routerLinkActive="active">Register</a>
+        </li>
+        <li class="nav-item" *ngIf="isAuthenticated$ | async">
+          <a (click)="logout()" class="nav-link" routerLink="/login" routerLinkActive="active">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div style="padding: 70px;">
+  <router-outlet></router-outlet>
+  <ngx-spinner  bdOpacity=0.9 bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="ball-spin-clockwise"></ngx-spinner>
+</div>

@@ -1,0 +1,64 @@
+<div class="container">
+   <h3 class="mb-5" style="margin-top: 10px;">Expense Management</h3>
+   <form class="row g-4" [formGroup]="expenseForm" (submit)="onSave()">
+      <div class="col">
+         <label for="description" class="form-label" style="font-weight: bold;" >Description</label>
+         <input type="text" class="form-control" id="description" formControlName="description" placeholder="Enter description">
+      </div>
+      <div class="col">
+         <label for="category" class="form-label" style="font-weight: bold;" >Category</label>
+         <select class="form-select" id="category" formControlName="category">
+         <option *ngFor="let category of categories" [value]="category.categoryId">{{ category.categoryName }}</option>
+         </select>
+      </div>
+      <div class="col">
+         <label for="expenseType" class="form-label" style="font-weight: bold;" >Expense Type</label>
+         <select class="form-select" id="expenseType" formControlName="expenseType">
+            <option value="2">Expense</option>
+            <option value="1">Income</option>
+         </select>
+      </div>
+      <div class="col">
+         <label for="amount" class="form-label" style="font-weight: bold;">Amount</label>
+         <input type="number" class="form-control" id="amount" formControlName="amount" placeholder="Enter Amount">
+      </div>
+      <div class="col">
+         <label for="datepicker" class="form-label" style="font-weight: bold;">Select a Date</label>
+         <input type="date" class="form-control" formControlName="date" id="datepicker">
+      </div>
+      <div>
+         <button type="submit" class="btn btn-primary btn-block w-10 ms-auto" style ="margin-right: 10px;" [disabled]="editingOrSaving">Save Expense</button>
+         <button type="button" class="btn btn-primary btn-block w-10 ms-auto" [disabled]="!editingOrSaving" (click)="onUpdateExpense()">Update Expense</button>
+      </div>
+   </form>
+   <hr style="margin-top: 15px;">
+   <h4 class="mb-5">Expense List</h4>
+   <div class="table-container" style="height: 393px; overflow: auto;">
+      <table class="table table-striped">
+         <thead>
+            <tr>
+               <th>Description</th>
+               <th>Category</th>
+               <th>ExpenseType</th>
+               <th>Amount</th>
+               <th>Date</th>
+               <th>Action</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr *ngFor="let item of expensesList.expenses | paginate: { itemsPerPage: expensesList.pageSize, currentPage: expensesList.page, totalItems: expensesList.totalItems }">
+               <td>{{item.description}}</td>
+               <td>{{item.categoryName}}</td>
+               <td>{{item.expenseType === 1 ? 'Income' : 'Expense'}}</td>
+               <td>{{item.amount}}</td>
+               <td>{{item.date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+               <td>
+                  <button type="button" class="btn btn-primary btn-sm" style ="margin-right: 10px;" (click)="onEditExpense(item)">Edit</button>
+                  <button type="button" class="btn btn-danger btn-sm" (click)="onDeleteExpense(item.expenseId)" [disabled]="deletingRecord">Delete</button>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+   <pagination-controls [style.position]="'relative'" [style.bottom]="'0px'" (pageChange)="onPageChange($event)"></pagination-controls>
+</div>

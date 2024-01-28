@@ -1,0 +1,51 @@
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="card rounded-4 p-3 mb-5 shadow-lg" style="width: 30rem; margin-top: 60px;">
+      <div class="card-body">
+        <h5 class="card-title text-center">Register</h5>
+        <form [formGroup]="registrationForm" (submit)="onSubmit()">
+          <div class="mb-3">
+            <label for="firstname" class="form-label">FirstName</label>
+            <input type="text" class="form-control" id="firstname" formControlName="firstname" placeholder="Enter your firstname">
+          </div>
+          <div class="mb-3">
+            <label for="lastname" class="form-label">LastName</label>
+            <input type="text" class="form-control" id="lastname" formControlName="lastname" placeholder="Enter your lastname">
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter your email">
+            <div *ngIf="registrationForm.get('email').hasError('email') && registrationForm.get('email').touched">
+              Please enter a valid email address.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" formControlName="password" placeholder="Enter your password">
+            <div *ngIf="registrationForm.get('password').hasError('pattern') && registrationForm.get('password').touched">
+              Password must be at least 4 characters long, contain at least one letter, one number, and one special character.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="budgetlimit" class="form-label">Budget Limit</label>
+            <input type="number" class="form-control" id="budgetlimit" formControlName="budgetlimit" placeholder="Enter your monthly budget limit">
+          </div>
+          <div class="mb-3">
+            <label for="savingsgoal" class="form-label">Savings Goal</label>
+            <input type="number" class="form-control" id="savingsgoal" formControlName="savingsgoal" placeholder="Enter your monthly Savings Goal">
+            <div *ngIf="registrationForm.get('savingsgoal').hasError('invalidComparison')">
+                Savings goal must be less than Budget Limit.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="balance" class="form-label">Balance</label>
+            <input type="number" class="form-control" id="balance" formControlName="balance" placeholder="Enter your current Balance">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block" [disabled]="registrationForm.invalid || loading">Register</button>
+          <div *ngIf="registrationFailed" class="error-message">
+            {{serverSideFailure}}
+          </div> 
+        </form>
+      </div>
+    </div>
+  </div>
+  

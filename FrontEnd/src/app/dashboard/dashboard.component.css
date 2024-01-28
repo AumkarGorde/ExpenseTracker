@@ -1,0 +1,21 @@
+.summary-content {
+    margin-top: 30px;
+}
+.table-container {
+    max-height: 350px; /* Adjust the maximum height as needed */
+    overflow-y: auto; /* Enable vertical scrollbar if content exceeds the height */
+  }
+  
+  /* Optional: Set a width for horizontal scrollbar if needed */
+  .table-container {
+    overflow-x: auto;
+  }
+
+  /* your-component.component.css */
+.input-group .form-control {
+  margin-right: 15px; /* Adjust the value as needed */
+
+}
+
+
+  
